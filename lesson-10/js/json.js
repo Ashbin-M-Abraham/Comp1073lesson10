@@ -32,24 +32,46 @@ function populateHeader(jsonObj) {
     // Create the H1 element
     let headerH1 = document.createElement( 'h1' );
     // Grab the company name from the JSON object and use it for the text node
-    headerH1.textContent = jsonObj.CompanyName;
+    headerH1.textContent = jsonObj.companyName;
     // Inject the complete H1 element into the DOM, inside the HEADER
     header.appendChild(headerH1);
 };
 /* STEP 10b: Assemble the showTopFlavors() function */
-function showTopFlavors() {
+function showTopFlavors(jsonObj) {
     // STEP 10c: Attache the JSON topFlavors object to a variable
-    //let topFlavors = jsonObj.topFlavors;
+    let topFlavors = jsonObj.topFlavors;
+    console.log(topFlavors);
     // STEP 10d: Loop through the topFlavors object
     for (let i = 0; i < topFlavors.length; i ++) {
         // STEP 10e: build HTML elements for the content
-        
+        let article = document.createElement('article');
+        let h2 = document.createElement('h2')
+
+        let image = document.createElement( 'img' ) ;
+
+
+
+        let ul = document.createElement('ul');
 
         // STEP 10f: Set the textContent property for each of the above elements (except the UL), based on the JSON content
-        
+        h2.textContent = topFlavors[i]["name"];
+        image.setAttribute("src",`images/${topFlavors[i]["images"]}`);
+        console.log(image);
+        let ingredient = topFlavors[i]['ingredients']
+        for (let j =0;j<ingredient.length;j++){
+
+            let listItem =document.createElement('li');
+            listItem.textContent=ingredient[j];
+            ul.appendChild(listItem);
+
+        }
+
 
         // STEP 10g: Build a loop for the ingredients array in the JSON
-        
+        article.appendChild(h2);   // add flavor name
+        article.appendChild(image);// add
+        article.appendChild(ul);   //add list of ingredients
+        article.appendChild(article);
             // add the ingredient to the UL
 
         // STEP 10h: Append each of the above HTML elements to the ARTICLE element
